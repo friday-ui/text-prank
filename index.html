@@ -3,78 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinite Scroll Prank</title>
+  <title>Scroll Surprise Prank</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-    .content {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    .line {
-      padding: 10px;
-      background-color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 10px;
-      border-radius: 10px;
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
       text-align: center;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    #prank-text {
+      font-size: 3rem;
+      color: red;
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
+  <h1>Scroll down... 🤭</h1>
+  <div id="blank-space"></div>
+  <div id="prank-text" style="display: none;">GOTCHA! PRANK LANG TO, BOSS! 😜</div>
 
-<div class="content" id="content">
-  <div class="line">Scroll down for funny stuff! 😈</div>
-</div>
-
-<script>
-const content = document.getElementById('content');
-const funnyLines = [
-  "Loading more funny stuff... 😂",
-  "Wait... you're still scrolling?? 🤣",
-  "Hindi mo maabot ending nito! 😜",
-  "Seriously... wala kang ibang gagawin? 😆",
-  "Mas maganda pa love life mo kaysa ending nito! 💔",
-  "Bakit ka nagtiyatiyaga boss?? HAHAHA",
-  "May naghahanap pa ba talaga? 😂",
-  "Ok ka lang? 😏",
-  "Scroll pa more! 🔥",
-  "Di ka talaga titigil ano? HAHAHA",
-  "Parang ex mo, wala na 'to! 😭"
-];
-
-function addLine() {
-  const line = document.createElement('div');
-  line.className = 'line';
-  line.innerText = funnyLines[Math.floor(Math.random() * funnyLines.length)];
-  content.appendChild(line);
-}
-
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    for (let i = 0; i < 5; i++) {
-      addLine();
+  <script>
+    // Add very long blank space
+    const blankSpace = document.getElementById("blank-space");
+    for (let i = 0; i < 500; i++) {
+      const spacer = document.createElement("div");
+      spacer.style.height = "100px";
+      blankSpace.appendChild(spacer);
     }
 
-    // Random funny alert
-    if (Math.random() < 0.2) {
-      alert("Boss, wala talaga ending to! 😆");
+    // Auto scroll slowly
+    let scrollPos = 0;
+    function autoScroll() {
+      window.scrollTo(0, scrollPos);
+      scrollPos += 1;
+      if (scrollPos < document.body.scrollHeight - window.innerHeight) {
+        requestAnimationFrame(autoScroll);
+      } else {
+        document.getElementById("prank-text").style.display = "block";
+      }
     }
-  }
-});
-
-// Add first few lines
-for (let i = 0; i < 10; i++) {
-  addLine();
-}
-</script>
-
+    autoScroll();
+  </script>
 </body>
 </html>
+
